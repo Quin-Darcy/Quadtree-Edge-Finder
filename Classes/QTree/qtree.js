@@ -70,12 +70,13 @@ class QTree {
             this.q3.get_coors();
             this.q4.get_coors();
         } else {
-            if (this.contains) {
-                BOX.push([this.x, this.y]);
+            if (this.contains && this.depth === MAX_DEPTH) {
+                BOX.push([this.x+this.w/2, this.y+this.h/2]);
             }
         }
     }
     clear() {
+        TOTAL_NODES = 0;
         if (this.subdivided) {
             if (this.q1.del && this.q2.del && this.q3.del && this.q4.del) {
                 this.subdivided = false;
@@ -94,6 +95,7 @@ class QTree {
         }
     }
     show() {
+        TOTAL_NODES += 1;
         rectMode(CORNER);
         stroke(255);
         strokeWeight(0.5);
